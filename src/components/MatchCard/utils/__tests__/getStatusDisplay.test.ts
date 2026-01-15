@@ -32,8 +32,13 @@ describe("getStatusDisplay", () => {
     expect(getStatusDisplay(match)).toBe("LIVE");
   });
 
-  it("returns HT for half-time matches", () => {
+  it("returns HT for half-time matches (finished status)", () => {
     const match = createMockMatch({ status: { code: 100, type: "finished" }, liveStatus: "HT" });
+    expect(getStatusDisplay(match)).toBe("HT");
+  });
+
+  it("returns HT for half-time matches (inprogress status)", () => {
+    const match = createMockMatch({ status: { code: 200, type: "inprogress" }, liveStatus: "HT" });
     expect(getStatusDisplay(match)).toBe("HT");
   });
 

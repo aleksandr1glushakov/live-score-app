@@ -12,14 +12,17 @@ export function getStatusDisplay(match: Match): string {
     return "CANCELLED";
   }
 
+  // Check for HT first, regardless of status.type
+  // HT can appear in both "inprogress" and "finished" statuses
+  if (liveStatus === "HT") {
+    return "HT";
+  }
+
   if (status.type === "inprogress") {
     return "LIVE";
   }
 
   if (status.type === "finished") {
-    if (liveStatus === "HT") {
-      return "HT";
-    }
     return "ENDED";
   }
 

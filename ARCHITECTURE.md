@@ -258,6 +258,11 @@ components/
 - Maintains separation of concerns
 - Progressive enhancement (works without JavaScript)
 
+**Current Implementation:**
+- Uses async file reading (`fs/promises`) to avoid blocking the event loop
+- For production scaling, consider adding caching/ISR or moving to a database
+- API responses currently mirror the file structure; validation schema (Zod) recommended when adding pagination/error handling
+
 ## Principles Applied
 
 1. **YAGNI (You Aren't Gonna Need It)**
@@ -281,13 +286,16 @@ components/
 
 ### Short-term (if adding 2-3 features)
 - Consider feature-based organization
-- Extract shared UI components to `shared/ui/`
+- Extract shared UI components to `shared/ui/` (buttons, badges, cards) to reuse styles and reduce duplication
 - Add error boundaries
+- Add validation schema (e.g., Zod) for API responses when pagination/error handling is needed
 
 ### Medium-term (5-10 features)
 - Evaluate Feature-Sliced Design
 - Consider state management library
 - Add data fetching library (React Query/SWR)
+- Implement caching/ISR (Incremental Static Regeneration) for matches data to improve performance
+- Add proper error handling and retry logic for API calls
 
 ### Long-term (10+ features)
 - Full FSD adoption
@@ -340,6 +348,9 @@ The application uses a hybrid rendering approach following Next.js 13+ best prac
 - Smooth scrolling uses `scrollTo({ behavior: "smooth" })`
 - Back to top button uses scroll event listener with cleanup
 - Responsive breakpoints defined in theme system
+- Date formatting uses UTC to avoid timezone issues and proper ordinal suffixes (ST, ND, RD, TH)
+- HT status correctly displayed in badge for both "inprogress" and "finished" statuses
+- Cancelled matches excluded from result/live/upcoming filters but included in "all"
 
 ## Conclusion
 
