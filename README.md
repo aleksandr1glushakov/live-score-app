@@ -2,6 +2,8 @@
 
 A Next.js application for displaying live football match scores with filtering capabilities.
 
+See the live app deployed to Vercel: [https://live-score-app-jade.vercel.app/](https://live-score-app-jade.vercel.app/)
+
 ## Features
 
 - Display live football match scores
